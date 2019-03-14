@@ -13,5 +13,6 @@ ENV twitterAPIKey [insert_here]
 ENV twitterAPISecretKey [insert_here]
 ENV twitterAccessToken [insert_here]
 ENV twitterAccessTokenSecret [insert_here]
+ENV gcpProjectId [insert_here]
 
 CMD python twitter-to-pubsub.py

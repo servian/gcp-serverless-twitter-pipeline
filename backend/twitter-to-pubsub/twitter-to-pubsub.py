@@ -32,7 +32,7 @@ class StdOutListener(StreamListener):
     client = utils.create_pubsub_client(utils.get_credentials())
 
     def write_to_pubsub(self, tw):
-        publish(self.client, 'projects/gartner-summit-2019/topics/twitter', tw)
+        publish(self.client, 'projects/{}/topics/twitter'.format(os.environ['gcpProjectId']), tw)
 
     def on_data(self, data):
         """What to do when tweet data is received."""
