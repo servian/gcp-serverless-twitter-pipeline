@@ -1,0 +1,33 @@
+$section-padding: 1.5rem;
+
+@import '~bulma/bulma';
+
+body {
+    font-family: "Avenir",
+        Helvetica,
+        Arial,
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.google-border {
+    height: 4px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    margin-bottom: 0 !important;
+
+    .column {
+        padding: 0;
+    }
+}
+
+.term {
+    background-color: rgba(238, 178, 17, 0.2);
+    font-weight: 500;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
