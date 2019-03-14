@@ -1,5 +1,8 @@
 *.lock
 *.iml
+.vscode
+node_modules
+dist/
 /.gradle/
 /gradle/
 /.idea/
