@@ -32,8 +32,8 @@ import static org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO.Write.WriteDisposit
  * Dataflow streaming pipeline to read tweets from PubSub topic and write the payload to BigQuery
  */
 public class TweetPipeline {
-    private static final String TOPIC = "projects/gcp-serverless-twitter-pipeline/topics/twitter";
-    private static final String TOPIC_OUT = "projects/gcp-serverless-twitter-pipeline/topics/tweets_filtered_beam_sql";
+    private static final String TOPIC = "projects/%s/topics/twitter";
+    private static final String TOPIC_OUT = "projects/%s/topics/tweets_filtered_beam_sql";
     private static final String BIGQUERY_DESTINATION_FILTERED = "%s:twitter.tweets_filtered_by_beam_sql";
     private static final Schema SCHEMA = Schema.builder()
             .addStringField("payload")
@@ -50,7 +50,7 @@ public class TweetPipeline {
         Pipeline pipeline = Pipeline.create(options);
 
         PCollection<PubsubMessage> messages = pipeline
-                .apply(PubsubIO.readMessagesWithAttributes().fromTopic(TOPIC))
+                .apply(PubsubIO.readMessagesWithAttributes().fromTopic(String.format(TOPIC, options.getProject())))
                 .apply(Window.into(FixedWindows.of(Duration.standardSeconds(1))));
 
         PCollection<Row> filteredBySql = messages
@@ -59,7 +59,7 @@ public class TweetPipeline {
                         "WHERE LOWER(tweet) LIKE '%onboard%' OR LOWER(tweet) LIKE '%data%'"));
 
         filteredBySql.apply(ParDo.of(new RowToString()))
-                .apply(PubsubIO.writeStrings().to(TOPIC_OUT));
+                .apply(PubsubIO.writeStrings().to(String.format(TOPIC_OUT, options.getProject())));
 
         filteredBySql.apply(ParDo.of(new RowToBQRow()))
                 .apply(BigQueryIO.writeTableRows()
