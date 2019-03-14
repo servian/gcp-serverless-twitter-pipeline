@@ -3,8 +3,7 @@
 .vscode
 node_modules
 dist/
-/.gradle/
-/gradle/
+/backend/dataflow/.gradle/
 /.idea/
 /build/
 /classes/
