@@ -11,7 +11,7 @@ import (
 
 func SaveToFirestore(ctx context.Context, data map[string]interface{}) error {
 	// Get a Firestore client.
-	client, err := firestore.NewClient(ctx, "chris-tippett-app-gartner-2019")
+	client, err := firestore.NewClient(ctx, "serverless-twitter-pipeline")
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
 	}
