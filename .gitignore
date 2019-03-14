@@ -1,7 +1,5 @@
 *.lock
 *.iml
-purge.sh
-trigger_pipeline.sh
 /.gradle/
 /gradle/
 /.idea/
@@ -11,7 +9,5 @@ trigger_pipeline.sh
 key.json
 .DS_Store
 cloud-function/.vscode/
-twitter.creds
 gradlew.*
 gradlew
-commands.txt
