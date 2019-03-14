@@ -1,0 +1,18 @@
+steps:
+  # Deploy pubsub-to-firestore cloud function
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      [
+        "functions",
+        "deploy",
+        "tweets-to-firestore",
+        "--entry-point",
+        "PubSubConsumer",
+        "--runtime",
+        "go111",
+        "--trigger-topic",
+        "projects/$PROJECT_ID/topics/${_TWITTER_FILTERED_TOPIC}",
+      ]
+    dir: "backend/pubsub-to-firestore"
+substitutions:
+  _TWITTER_FILTERED_TOPIC: tweets_filtered_beam_sql
