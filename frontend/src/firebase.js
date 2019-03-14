@@ -3,12 +3,12 @@ import Firebase from 'firebase'
 require('firebase/firestore')
 
 const firebaseApp = Firebase.initializeApp({
-    apiKey: "AIzaSyCZsgsvH-b002URKTpmpcsCw_via2Lxbz0",
-    authDomain: "chris-tippett-app-gartner-2019.firebaseapp.com",
-    databaseURL: "https://chris-tippett-app-gartner-2019.firebaseio.com",
-    projectId: "chris-tippett-app-gartner-2019",
-    storageBucket: "chris-tippett-app-gartner-2019.appspot.com",
-    messagingSenderId: "1066438672635"
+    apiKey: "AIzaSyBXTfR_fk30K-66ymwHQnLM9hoO9Cyh8iU",
+    authDomain: "serverless-twitter-pipeline.firebaseapp.com",
+    databaseURL: "https://serverless-twitter-pipeline.firebaseio.com",
+    projectId: "serverless-twitter-pipeline",
+    storageBucket: "serverless-twitter-pipeline.appspot.com",
+    messagingSenderId: "2892640778"
 })
 
 export const db = firebaseApp.firestore()
