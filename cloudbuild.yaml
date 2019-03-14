@@ -1,0 +1,5 @@
+steps:
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["builds", "submit", "--config=cloudbuild-backend.yaml"]
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["builds", "submit", "--config=cloudbuild-frontend.yaml"]
