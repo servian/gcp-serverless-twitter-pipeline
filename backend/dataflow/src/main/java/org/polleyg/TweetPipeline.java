@@ -32,8 +32,8 @@ import static org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO.Write.WriteDisposit
  * Dataflow streaming pipeline to read tweets from PubSub topic and write the payload to BigQuery
  */
 public class TweetPipeline {
-    private static final String TOPIC = "projects/gartner-summit-2019/topics/twitter";
-    private static final String TOPIC_OUT = "projects/gartner-summit-2019/topics/tweets_filtered_beam_sql";
+    private static final String TOPIC = "projects/gcp-serverless-twitter-pipeline/topics/twitter";
+    private static final String TOPIC_OUT = "projects/gcp-serverless-twitter-pipeline/topics/tweets_filtered_beam_sql";
     private static final String BIGQUERY_DESTINATION_FILTERED = "%s:twitter.tweets_filtered_by_beam_sql";
     private static final Schema SCHEMA = Schema.builder()
             .addStringField("payload")
