@@ -1,10 +1,10 @@
 steps:
-  # App Engine ('beta' for live debugging)
+  # Deploy App Engine Flex
 - name: gcr.io/cloud-builders/gcloud
-  args: ['beta', 'app', 'deploy', '--version=tweets']
+  args: ['app', 'deploy', '--version=tweets']
   dir: 'backend/twitter-to-pubsub'
 
-  # Dataflow pipeline
+  # Deploy Dataflow
 - name: gcr.io/cloud-builders/gradle
   args: ['run']
   dir: 'backend/dataflow'
@@ -21,7 +21,7 @@ steps:
       "--runtime",
       "go111",
       "--trigger-topic",
-      "projects/$PROJECT_ID/topics/${_TWITTER_FILTERED_TOPIC}",
+      "${_TWITTER_FILTERED_TOPIC}",
     ]
   dir: "backend/pubsub-to-firestore"
 substitutions:

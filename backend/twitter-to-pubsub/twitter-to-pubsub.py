@@ -59,5 +59,5 @@ if __name__ == '__main__':
     stream = Stream(auth, listener)
     stream.filter(languages=['en'], track=['tech', 'technology', 'google', 'amazon',
                                            'microsoft', 'apple', 'ibm', 'oracle', 'cloud',
-                                           'google cloud', 'sql', 'data', 'googlecloudonboard',
-                                           'onboard', 'gcp'])
+                                           'google cloud', 'sql', 'data', 'dotc19',
+                                           'serverless', 'gcp'])

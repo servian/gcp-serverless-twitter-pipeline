@@ -56,7 +56,7 @@ public class TweetPipeline {
         PCollection<Row> filteredBySql = messages
                 .apply(ParDo.of(new PubSubMessageToBeamSqlRow())).setRowSchema(SCHEMA)
                 .apply(SqlTransform.query("SELECT * FROM PCOLLECTION " +
-                        "WHERE LOWER(tweet) LIKE '%onboard%' OR LOWER(tweet) LIKE '%data%'"));
+                        "WHERE LOWER(tweet) LIKE '%dotc19%' OR LOWER(tweet) LIKE '%data%'"));
 
         filteredBySql.apply(ParDo.of(new RowToString()))
                 .apply(PubsubIO.writeStrings().to(String.format(TOPIC_OUT, options.getProject())));
@@ -80,7 +80,6 @@ public class TweetPipeline {
     public static class RowToString extends DoFn<Row, String> {
         @ProcessElement
         public void processElement(ProcessContext c) {
-            System.out.println(c.element().getString("tweet"));
             c.output(c.element().getString("payload")); //spit out the entire payload
         }
     }
