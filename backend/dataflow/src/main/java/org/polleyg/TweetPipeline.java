@@ -56,7 +56,7 @@ public class TweetPipeline {
         PCollection<Row> filteredBySql = messages
                 .apply(ParDo.of(new PubSubMessageToBeamSqlRow())).setRowSchema(SCHEMA)
                 .apply(SqlTransform.query("SELECT * FROM PCOLLECTION " +
-                        "WHERE LOWER(tweet) LIKE '%dotc19%' OR LOWER(tweet) LIKE '%data%'"));
+                        "WHERE LOWER(tweet) LIKE '%dotc%' OR LOWER(tweet) LIKE '%data%'"));
 
         filteredBySql.apply(ParDo.of(new RowToString()))
                 .apply(PubsubIO.writeStrings().to(String.format(TOPIC_OUT, options.getProject())));
