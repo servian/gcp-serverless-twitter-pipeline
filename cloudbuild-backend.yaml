@@ -8,6 +8,7 @@ steps:
 - name: gcr.io/cloud-builders/gradle
   args: ['run']
   dir: 'backend/dataflow'
+  waitFor: ['-']
 
   # Deploy pubsub-to-firestore cloud function
 - name: "gcr.io/cloud-builders/gcloud"
@@ -24,6 +25,7 @@ steps:
       "${_TWITTER_FILTERED_TOPIC}",
     ]
   dir: "backend/pubsub-to-firestore"
+  waitFor: ['-']
 substitutions:
   _TWITTER_FILTERED_TOPIC: tweets_filtered_beam_sql
 
