@@ -94,9 +94,10 @@ export default {
       },
       config: {
         delay: 500,
-        tags: ["data", "#googlecloudonboard"]
+        tags: [],
+        popupTags: []
       },
-      vipTweetUserIds: [1095923452987359233, 1730415624],
+      vipTweetUserIds: [1730415624],
       vipTweets: []
     }
   },
@@ -130,6 +131,12 @@ export default {
           }
         })
     },
+    popupTweet: function(tweet) {
+      this.debugVip = false
+      this.vipTweets.pop()
+      this.vipTweets.unshift(tweet)
+      this.sleep(10000).then(() => this.vipTweets.pop())
+    },
     subscribeToTweets: function(collectionName, collectionArray) {
       db.collection("tweets")
         .orderBy("timestamp_ms", "desc")
@@ -146,14 +153,15 @@ export default {
                 data: change.doc.data(),
                 id: change.doc.id
               }
-              if (
-                this.vipTweetUserIds.includes(tweet.data.user.id) ||
-                tweet.data.text.toLowerCase().includes("#googlecloudonboard")
-              ) {
-                this.debugVip = false
-                this.vipTweets.pop()
-                this.vipTweets.unshift(tweet)
-                this.sleep(10000).then(() => this.vipTweets.pop())
+              // Check whether tweet contains popup tags
+              this.config.popupTags.forEach(val => {
+                if (tweet.data.text.toLowerCase().includes(val)) {
+                  this.popupTweet(tweet)
+                }
+              })
+              // Check whether tweet from vip users
+              if (this.vipTweetUserIds.includes(tweet.data.user.id)) {
+                this.popupTweet(tweet)
               }
               collectionArray.unshift(tweet)
               this.counter[collectionName]++
