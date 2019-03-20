@@ -1,16 +1,16 @@
 steps:
-  # Deploy App Engine Flex
+  # Deploy App Engine Flex (serverless container)
 - name: gcr.io/cloud-builders/gcloud
   args: ['app', 'deploy', '--version=tweets']
   dir: 'backend/twitter-to-pubsub'
 
-  # Deploy Dataflow
+  # Deploy Dataflow (serverless data ingestion)
 - name: gcr.io/cloud-builders/gradle
   args: ['run']
   dir: 'backend/dataflow'
   waitFor: ['-']
 
-  # Deploy pubsub-to-firestore cloud function
+  # Deploy Cloud function (serverless compute)
 - name: "gcr.io/cloud-builders/gcloud"
   args:
     [
